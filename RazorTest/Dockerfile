@@ -11,6 +11,12 @@ COPY ["RazorTest.csproj", "RazorTest/"]
 RUN dotnet restore "RazorTest/RazorTest.csproj"
 COPY . /RazorTest/
 WORKDIR "/src/RazorTest"
+
+RUN apt-get update -yq && apt-get upgrade -yq && apt-get install -yq curl git nano
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && apt-get install -yq nodejs build-essential
+RUN npm install -g npm
+RUN npm install
+
 RUN dotnet build "RazorTest.csproj" -c Release -o /app/build
 
 FROM build AS publish
