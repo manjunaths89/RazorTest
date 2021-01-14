@@ -7,7 +7,7 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["RazorTest/RazorTest.csproj", "RazorTest/"]
+COPY ["RazorTest.csproj", "RazorTest/"]
 RUN dotnet restore "RazorTest/RazorTest.csproj"
 COPY . .
 WORKDIR "/src/RazorTest"
