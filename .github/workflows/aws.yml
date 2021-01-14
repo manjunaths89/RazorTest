@@ -54,11 +54,12 @@ jobs:
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: razortest
-        IMAGE_TAG: "${{ github.sha }}/RazorTest"
+        IMAGE_TAG: ${{ github.sha }}
       run: |
         # Build a docker container and
         # push it to ECR so that it can
         # be deployed to ECS.
+        cd RazorTest
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG ./RazorTest
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
