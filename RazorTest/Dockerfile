@@ -6,15 +6,15 @@
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
 
-RUN apt-get install tree
 
-RUN printf "----- DIR : INITIAL ----"
-RUN tree -f
+
+#RUN printf "----- DIR : INITIAL ----"
+#RUN tree -f
 
 WORKDIR /app
 
-RUN printf "----- DIR : AFTER SETTING TO /app ----"
-RUN tree -f
+#RUN printf "----- DIR : AFTER SETTING TO /app ----"
+#RUN tree -f
 
 EXPOSE 80
 EXPOSE 443
@@ -24,6 +24,8 @@ RUN apt-get install -y nodejs
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 RUN curl -sL https://deb.nodesource.com/setup_10.x |  bash -
 RUN apt-get install -y nodejs
+
+RUN apt-get install tree
 
 RUN printf "----- DIR : BEFORE SETTING TO /src ----"
 RUN tree -f
