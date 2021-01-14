@@ -15,6 +15,9 @@ WORKDIR /src
 COPY ["RazorTest/RazorTest.csproj", "RazorTest/"]
 RUN dotnet restore "RazorTest/RazorTest.csproj"
 COPY . .
+
+RUN ls -d */
+
 WORKDIR "/src/RazorTest"
 RUN dotnet build "RazorTest.csproj" -c Release -o /app/build
 
