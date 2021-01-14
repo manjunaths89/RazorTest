@@ -24,9 +24,9 @@
 #    and best practices on handling the access key credentials.
 
 on:
-  release:
-    types: [created]
-
+  pull_request:
+    branches: main
+    
 name: Deploy to Amazon ECS
 
 jobs:
