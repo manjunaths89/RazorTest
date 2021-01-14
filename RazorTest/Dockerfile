@@ -27,28 +27,28 @@ RUN apt-get install -y nodejs
 
 RUN apt-get install tree
 
-RUN printf "----- DIR : BEFORE SETTING TO /src ----"
+RUN echo "----- DIR : BEFORE SETTING TO /src ----"
 RUN tree -f
 
 WORKDIR /src
 
-RUN printf "----- DIR : AFTER SETTING TO /src ----"
+RUN echo "----- DIR : AFTER SETTING TO /src ----"
 RUN tree -f
 
 COPY ["RazorTest.csproj", "RazorTest/"]
 RUN dotnet restore "RazorTest/RazorTest.csproj"
 
-RUN printf "----- DIR : AFTER COPYING .csproj file ----"
+RUN echo "----- DIR : AFTER COPYING .csproj file ----"
 RUN tree -f
 
 COPY . .
 
-RUN printf "----- DIR : AFTER COPYING ALL TO /src ----"
+RUN echo "----- DIR : AFTER COPYING ALL TO /src ----"
 RUN tree -f
 
 WORKDIR "/src/RazorTest"
 
-RUN printf "----- DIR : AFTER CHANGING DIR TO /src/RazorTest ----"
+RUN echo "----- DIR : AFTER CHANGING DIR TO /src/RazorTest ----"
 RUN tree -f
 
 RUN dotnet build "RazorTest.csproj" -c Release -o /app/build
@@ -58,12 +58,12 @@ RUN dotnet publish "RazorTest.csproj" -c Release -o /app/publish
 
 FROM base AS final
 
-RUN printf "----- DIR : BEFORE CHANGING DIR TO /app ----"
+RUN echo "----- DIR : BEFORE CHANGING DIR TO /app ----"
 RUN tree -f
 
 WORKDIR /app
 
-RUN printf "----- DIR : AFTER CHANGING DIR TO /app ----"
+RUN echo "----- DIR : AFTER CHANGING DIR TO /app ----"
 RUN tree -f
 
 COPY --from=publish /app/publish .
