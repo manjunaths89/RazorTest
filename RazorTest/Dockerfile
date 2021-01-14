@@ -12,13 +12,14 @@ FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 RUN curl -sL https://deb.nodesource.com/setup_10.x |  bash -
 RUN apt-get install -y nodejs
 WORKDIR /src
-COPY ["RazorTest/RazorTest.csproj", "RazorTest/"]
+COPY ["RazorTest.csproj", "RazorTest/"]
 RUN dotnet restore "RazorTest/RazorTest.csproj"
 COPY . .
 
+WORKDIR "/src/RazorTest"
+
 RUN ls -d */
 
-WORKDIR "/src/RazorTest"
 RUN dotnet build "RazorTest.csproj" -c Release -o /app/build
 
 FROM build AS publish
