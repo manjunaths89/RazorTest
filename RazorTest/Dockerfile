@@ -20,6 +20,10 @@ WORKDIR "/src/RazorTest"
 
 RUN ls -d */
 
+RUN apt-get install tree
+
+RUN tree -f
+
 RUN dotnet build "RazorTest.csproj" -c Release -o /app/build
 
 FROM build AS publish
