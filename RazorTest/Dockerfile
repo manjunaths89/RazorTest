@@ -9,7 +9,7 @@ FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
 COPY ["RazorTest.csproj", "RazorTest/"]
 RUN dotnet restore "RazorTest/RazorTest.csproj"
-COPY . .
+COPY . /RazorTest/
 WORKDIR "/src/RazorTest"
 RUN dotnet build "RazorTest.csproj" -c Release -o /app/build
 
